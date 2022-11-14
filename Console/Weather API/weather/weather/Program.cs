@@ -64,7 +64,11 @@ namespace weather
             string urlParams = $"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=fcb474d654a08751798995f3ae4a2508";
 
             var apiData = await APICallAsync(baseUrl, urlParams);
-            Console.WriteLine($"Det är just nu {apiData.main.temp - 273.15} celcius i \"{apiData.name}\"");
+
+            if (apiData != null)
+            {
+                Console.WriteLine($"Det är just nu {apiData.main.temp - 273.15} celcius i \"{apiData.name}\"");
+            }
         }
     }
 }
