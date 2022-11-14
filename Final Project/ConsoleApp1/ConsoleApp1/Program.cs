@@ -27,18 +27,18 @@ namespace weather
         public PeriodObj[] periods { get; set; }
     }
 
-    public class ResultObj
+    public class PlaceObj
     {
         public OpeningHoursObj opening_hours { get; set; }
     }
-    public class PlaceObj
+    public class ApiObj
     {
-        public ResultObj result { get; set; }
+        public PlaceObj[] results { get; set; }
     }
 
     internal class Program
     {
-        static async Task<PlaceObj> APICallAsync(string url, string urlParameters)
+        static async Task<ApiObj> APICallAsync(string url, string urlParameters)
         {
             HttpClient apiClient = new HttpClient();
 
@@ -52,7 +52,7 @@ namespace weather
             {
                 string apiJSON = await apiResp.Content.ReadAsStringAsync();
                 Console.WriteLine(apiJSON);
-                PlaceObj apiData = JsonConvert.DeserializeObject<PlaceObj>(apiJSON);
+                ApiObj apiData = JsonConvert.DeserializeObject<ApiObj>(apiJSON);
                 return apiData;
             }
             else
@@ -81,6 +81,8 @@ namespace weather
             Console.WriteLine($"{baseUrl}{urlParams}");
 
             var apiData = await APICallAsync(baseUrl, urlParams);
+
+            Console.WriteLine(apiData.results[1].opening_hours.open_now);
         }
     }
 }

@@ -17,7 +17,6 @@ namespace ConsoleApp1
             Console.WriteLine("Input any mathmatical equation: ");
             string mathEq = Console.ReadLine();
 
-
             try
             {
                 var mathEqResult = dt.Compute(mathEq, "");
