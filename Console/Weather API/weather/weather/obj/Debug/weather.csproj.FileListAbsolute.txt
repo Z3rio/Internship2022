@@ -1,0 +1,8 @@
+C:\Users\praktik\NeoPraktik\Console\Weather API\weather\weather\bin\Debug\weather.exe.config
+C:\Users\praktik\NeoPraktik\Console\Weather API\weather\weather\bin\Debug\weather.exe
+C:\Users\praktik\NeoPraktik\Console\Weather API\weather\weather\bin\Debug\weather.pdb
+C:\Users\praktik\NeoPraktik\Console\Weather API\weather\weather\obj\Debug\weather.csproj.AssemblyReference.cache
+C:\Users\praktik\NeoPraktik\Console\Weather API\weather\weather\obj\Debug\weather.csproj.SuggestedBindingRedirects.cache
+C:\Users\praktik\NeoPraktik\Console\Weather API\weather\weather\obj\Debug\weather.csproj.CoreCompileInputs.cache
+C:\Users\praktik\NeoPraktik\Console\Weather API\weather\weather\obj\Debug\weather.exe
+C:\Users\praktik\NeoPraktik\Console\Weather API\weather\weather\obj\Debug\weather.pdb

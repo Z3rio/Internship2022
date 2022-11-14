@@ -10,12 +10,13 @@ namespace ConsoleApp1
 {
     internal class Program
     {
+        static DataTable dt = new DataTable();
+
         static void MainLoop()
         {
             Console.WriteLine("Input any mathmatical equation: ");
             string mathEq = Console.ReadLine();
 
-            DataTable dt = new DataTable();
 
             try
             {
