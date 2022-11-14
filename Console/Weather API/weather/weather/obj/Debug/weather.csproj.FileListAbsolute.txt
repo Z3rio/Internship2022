@@ -6,3 +6,6 @@ C:\Users\praktik\NeoPraktik\Console\Weather API\weather\weather\obj\Debug\weathe
 C:\Users\praktik\NeoPraktik\Console\Weather API\weather\weather\obj\Debug\weather.csproj.CoreCompileInputs.cache
 C:\Users\praktik\NeoPraktik\Console\Weather API\weather\weather\obj\Debug\weather.exe
 C:\Users\praktik\NeoPraktik\Console\Weather API\weather\weather\obj\Debug\weather.pdb
+C:\Users\praktik\NeoPraktik\Console\Weather API\weather\weather\bin\Debug\Newtonsoft.Json.dll
+C:\Users\praktik\NeoPraktik\Console\Weather API\weather\weather\bin\Debug\Newtonsoft.Json.xml
+C:\Users\praktik\NeoPraktik\Console\Weather API\weather\weather\obj\Debug\weather.csproj.CopyComplete
