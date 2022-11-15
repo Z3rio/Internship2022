@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7HBOGQoAA6k/kpE2woD+Gzj/dEJmBLDMbjXM70OPKxoIxa8NWcHG9Sax8sX2GBG8qRPLLoY7eviN5iXfrx7mKg==",
+  "dgSpecHash": "aWwQz5Dm4Rvcb6VAieY4+MsznJH1i1bWVPHrYiEcfopErkIkisAulBqLnxOKrq91MVW3B5BCSMSgUiHLGoBk7w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\praktik\\NeoPraktik\\Final Project\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+  "projectFilePath": "C:\\Users\\praktik\\NeoPraktik\\Final Project\\api\\WebApplication1\\WebApplication1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\praktik\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],

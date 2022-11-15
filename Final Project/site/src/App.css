@@ -5,37 +5,89 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.App,
+.resturants {
+  display: flex;
+  flex-direction: column;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.resturants {
+  row-gap: 2rem;
+
+  margin-top: 25px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+h1, p, h3, h2 {
+  margin: 0px;
 }
 
-.card {
-  padding: 2em;
+.header h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
 }
 
-.read-the-docs {
-  color: #888;
+.header p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.MuiButtonBase-root {
+  outline: none!important;
+}
+
+.upper-text {
+  display: flex;
+  flex-direction: row;
+  column-gap: 15px;
+  align-items: center;
+}
+
+.upper-text h1 {
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.resturant {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  row-gap: 7.5px;
+
+  padding-left: 0.75rem;
+
+  border-left: 2px solid;
+}
+
+.resturant.no-data {
+border-left-color: #e7ad42;
+}
+
+.resturant.open {
+  border-left-color: #38bd38;
+}
+
+.resturant.closed {
+  border-left-color: #dd5c5c;
+}
+
+.upper-text h3 {
+  color: #ddd;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.chips {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  column-gap: 7.5px;
+}
+
+.goback-button {
+  margin: 1rem 0!important;
 }

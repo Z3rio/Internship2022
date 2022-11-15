@@ -1,19 +1,19 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\praktik\\NeoPraktik\\Final Project\\WebApplication1\\WebApplication1\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\WebApplication1.bundle.scp.css",
+      "Id": "C:\\Users\\praktik\\NeoPraktik\\Final Project\\api\\WebApplication1\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\WebApplication1.bundle.scp.css",
       "PackagePath": "staticwebassets\\WebApplication1.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\praktik\\NeoPraktik\\Final Project\\WebApplication1\\WebApplication1\\wwwroot\\css\\site.css",
+      "Id": "C:\\Users\\praktik\\NeoPraktik\\Final Project\\api\\WebApplication1\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Users\\praktik\\NeoPraktik\\Final Project\\WebApplication1\\WebApplication1\\wwwroot\\favicon.ico",
+      "Id": "C:\\Users\\praktik\\NeoPraktik\\Final Project\\api\\WebApplication1\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\praktik\\NeoPraktik\\Final Project\\WebApplication1\\WebApplication1\\wwwroot\\js\\site.js",
+      "Id": "C:\\Users\\praktik\\NeoPraktik\\Final Project\\api\\WebApplication1\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {

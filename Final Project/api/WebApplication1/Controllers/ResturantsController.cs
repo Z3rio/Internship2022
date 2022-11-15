@@ -10,9 +10,10 @@ namespace WebApplication1.Controllers
     {
         // 
         // GET: /Resturants/
-        public async Task<string> Index(string search, string radius)
+        [AllowCrossSiteJson]
+        public async Task<string> Index(string search = "resturant", string radius = "2000")
         {
-            if (search is string && search != "" && radius is string && radius != "")
+            if (!string.IsNullOrEmpty(search) && !string.IsNullOrEmpty(radius))
             {
                 string baseUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
 

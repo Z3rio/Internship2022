@@ -1,0 +1,46 @@
+.input-box {
+  margin-top: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.input-box .MuiPaper-root {
+  margin-bottom: 1rem;
+}
+
+.input-box div:not(.MuiPaper-root) {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  align-items: center;
+}
+
+.input-box .MuiFormControl-root {
+  flex: 1;
+}
+
+.input-box .MuiInputBase-root {
+  width: 100%;
+}
+
+.input-box .MuiInputBase-root input {
+  color: #fff;
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+.input-box div .MuiSlider-root {
+  flex: 1;
+}
+
+.input-box input[type="text"] {
+  padding: 5px 10px;
+  border-radius: 5px;
+  outline: none;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+}
