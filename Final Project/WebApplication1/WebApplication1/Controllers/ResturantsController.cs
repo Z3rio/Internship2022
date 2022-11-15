@@ -2,6 +2,7 @@
 using static api.Struct;
 using static api.Handler;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace WebApplication1.Controllers
 {
@@ -9,7 +10,7 @@ namespace WebApplication1.Controllers
     {
         // 
         // GET: /Resturants/
-        public async Task<string?> Index(string search, string radius)
+        public async Task<string> Index(string search, string radius)
         {
             if (search is string && search != "" && radius is string && radius != "")
             {
@@ -22,9 +23,7 @@ namespace WebApplication1.Controllers
 
                 string urlParams = $"?key={apiKey}&keyword={search}&radius={radius}&location={lat}%2C{lon}&type=resturant";
 
-                Console.WriteLine($"{baseUrl}{urlParams}");
-
-                string apiResp = await APICallAsync(baseUrl, urlParams);
+                string apiResp = await APICallAsync(baseUrl, urlParams, "application/json");
 
                 if (apiResp != null && apiResp != "")
                 {

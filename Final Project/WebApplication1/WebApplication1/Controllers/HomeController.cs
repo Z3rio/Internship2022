@@ -11,9 +11,11 @@ namespace WebApplication1.Controllers
         // GET: /
         public async Task<IActionResult> Index()
         {
-            string apiResp = await APICallAsync("https://localhost:7115/resturants", "?search=mcdonalds&radius=2000");
+            string apiResp = await APICallAsync("https://localhost:7115/resturants", "?search=mcdonalds&radius=2000", "text/html");
 
-            ApiObj? apiData = JsonConvert.DeserializeObject<ApiObj?>(apiResp);
+            ApiObj apiData = JsonConvert.DeserializeObject<ApiObj>(apiResp);
+
+            ViewData["Resturants"] = apiData.results;
 
             return View();
         }
