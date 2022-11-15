@@ -8,63 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Policy;
 using Newtonsoft.Json;
+using static resturant.ApiStruct;
+using static resturant.APIHandler;
 
-namespace weather
+namespace resturant
 {
-    public class TimeObj
-    {
-        public int day { get; set; }
-        public string time { get; set; }
-    }
-    public class PeriodObj
-    {
-        public TimeObj close { get; set; }
-        public TimeObj open { get; set; }
-    }
-    public class OpeningHoursObj
-    {
-        public bool open_now { get; set; }
-        public PeriodObj[] periods { get; set; }
-    }
-
-    public class PlaceObj
-    {
-        public OpeningHoursObj opening_hours { get; set; }
-    }
-    public class ApiObj
-    {
-        public PlaceObj[] results { get; set; }
-    }
-
     internal class Program
     {
-        static async Task<ApiObj> APICallAsync(string url, string urlParameters)
-        {
-            HttpClient apiClient = new HttpClient();
-
-            apiClient.BaseAddress = new Uri(url);
-
-            apiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            HttpResponseMessage apiResp = apiClient.GetAsync(urlParameters).Result;
-
-            if (apiResp.IsSuccessStatusCode)
-            {
-                string apiJSON = await apiResp.Content.ReadAsStringAsync();
-                Console.WriteLine(apiJSON);
-                ApiObj apiData = JsonConvert.DeserializeObject<ApiObj>(apiJSON);
-                return apiData;
-            }
-            else
-            {
-                Console.WriteLine($"{(int)apiResp.StatusCode} ({apiResp.ReasonPhrase})");
-            }
-
-            apiClient.Dispose();
-
-            return null;
-        }
-
         static async Task Main(string[] args)
         {
             string baseUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
@@ -82,7 +32,10 @@ namespace weather
 
             var apiData = await APICallAsync(baseUrl, urlParams);
 
-            Console.WriteLine(apiData.results[1].opening_hours.open_now);
+            if (apiData != null)
+            {
+                Console.WriteLine(apiData.results[1].opening_hours.open_now);
+            }
         }
     }
 }
