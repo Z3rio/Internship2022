@@ -64,3 +64,10 @@ C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\obj\Debug\net7.0\r
 C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\obj\Debug\net7.0\WebApplication1.pdb
 C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\obj\Debug\net7.0\WebApplication1.genruntimeconfig.cache
 C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\obj\Debug\net7.0\ref\WebApplication1.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\System.Web.Mvc.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\System.Web.Razor.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\System.Web.Helpers.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\System.Web.WebPages.Deployment.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\System.Web.WebPages.Razor.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\System.Web.WebPages.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\Microsoft.Web.Infrastructure.dll
