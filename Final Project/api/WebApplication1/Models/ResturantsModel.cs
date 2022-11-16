@@ -1,17 +1,20 @@
-﻿namespace api
+﻿
+namespace WebApplication1.Models
 {
-    internal class Struct
+    public class ResturantsModel
     {
         public class TimeObj
         {
             public int? day { get; set; }
             public string? time { get; set; }
         }
+
         public class PeriodObj
         {
             public TimeObj? close { get; set; }
             public TimeObj? open { get; set; }
         }
+
         public class OpeningHoursObj
         {
             public bool? open_now { get; set; }
@@ -25,9 +28,7 @@
             public string? name { get; set; }
             public decimal? rating { get; set; }
         }
-        public class ApiObj
-        {
-            public PlaceObj[]? results { get; set; }
-        }
+
+        public PlaceObj[]? results { get; set; }
     }
 }
