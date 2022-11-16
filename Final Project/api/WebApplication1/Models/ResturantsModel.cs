@@ -1,4 +1,5 @@
 ﻿
+using System.Linq;
 using static WebApplication1.Models.ResturantsModel;
 
 namespace WebApplication1.Models
@@ -33,5 +34,9 @@ namespace WebApplication1.Models
         }
 
         public PlaceObj[]? results { get; set; }
+
+        public class SortedResults { 
+            public IOrderedEnumerable<PlaceObj> results { get; set; }
+        }
     }
 }
