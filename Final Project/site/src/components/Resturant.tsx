@@ -1,6 +1,8 @@
 import Rating from "@mui/material/Rating";
 import Chip from "@mui/material/Chip";
 
+import "./Resturant.css";
+
 interface PropsStruct {
   idx: number;
 
@@ -15,7 +17,7 @@ interface PropsStruct {
   };
 }
 
-function FormatChipString(str: string) {
+function FormatChipString(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1).replace(/_/g, " ");
 }
 

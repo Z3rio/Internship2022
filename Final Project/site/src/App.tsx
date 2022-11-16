@@ -6,10 +6,10 @@ import withReactContent from "sweetalert2-react-content";
 
 import axios from "axios";
 
-import Button from "@mui/material/Button";
-
 import InputBox from "./components/InputBox";
 import Resturant from "./components/Resturant";
+import NavBar from "./components/NavBar";
+import OptionsList from "./components/OptionsList";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
@@ -33,102 +33,140 @@ interface ResturantStruct {
   };
 }
 
-function App() {
-  const [resturants, setResturants] = useState([]);
-  const [errorText, setErrorText] = useState("");
+let cooldown = false;
 
-  const [range, setRange] = useState(1000);
-  const [keyword, setKeyword] = useState("");
+function App() {
+  const [resturants, setResturants] = useState<Array<ResturantStruct>>([]);
+  const [errorText, setErrorText] = useState<string>("");
+
+  const [range, setRange] = useState<number>(1000);
+  const [keyword, setKeyword] = useState<string>("");
+
+  const [loggedIn, setLoggedIn] = useState<boolean>(true);
+
+  const [priceRange, setPriceRange] = useState<Array<number>>([0, 5]);
+  const [sort, setSort] = useState<string>("rating");
 
   function updateRange(e: any): void {
     setRange(e.target.value);
   }
 
+  const handlePriceRangeChange = (event: Event, newValue: number[]) => {
+    setPriceRange(newValue);
+  };
+
+  const handleSortChange = (event: Event, newValue: string) => {
+    setSort(newValue.props.value);
+  };
+
+  const handleRadiusChange = (event: Event, newValue: number) => {
+    setRange(newValue);
+  };
+
   function updateKeyword(e: any): void {
     setKeyword(e.target.value);
   }
 
-  function submit() {
-    if (keyword == "") {
-      SweetAlert.fire({
-        title: "Invalid keyword",
-        text: "You have to input an keyword before trying to search",
-        icon: "error",
-      });
-      return;
-    }
+  function submit(): void {
+    if (cooldown == false) {
+      if (keyword == "") {
+        SweetAlert.fire({
+          title: "Invalid keyword",
+          text: "You have to input an keyword before trying to search",
+          icon: "error",
+        });
+        setResturants([]);
+        return;
+      }
 
-    if (range < 500 || range > 5000) {
-      SweetAlert.fire({
-        title: "Invalid range",
-        icon: "error",
-      });
-      return;
-    }
+      if (range < 500 || range > 5000) {
+        SweetAlert.fire({
+          title: "Invalid range",
+          icon: "error",
+        });
+        setResturants([]);
+        return;
+      }
 
-    axios
-      .post(
-        `https://localhost:7115/resturants?search=${keyword}&radius=${range}`
-      )
-      .then((resp: any) => {
-        if (resp.status == 200) {
-          if (resp.data.status !== "ZERO_RESULTS") {
-            setResturants(resp.data.results);
-            setErrorText("");
+      axios
+        .post(
+          `https://localhost:7115/resturants/search?search=${keyword}&radius=${range}&minPrice=${priceRange[0]}&maxPrice=${priceRange[1]}&sort=${sort}`
+        )
+        .then((resp: any) => {
+          cooldown = true;
+          if (resp.status == 200) {
+            if (resp.data.status !== "ZERO_RESULTS") {
+              setResturants(resp.data.results);
+              setErrorText("");
+            } else {
+              setResturants([]);
+              setErrorText("No search results found...");
+            }
           } else {
-            setErrorText("No search results found...");
+            setResturants([]);
+            console.error(resp.statusText);
+            setErrorText(resp.statusText);
           }
-          console.log(resp);
-        } else {
-          console.error(resp.statusText);
-          setErrorText(resp.statusText);
-        }
-      })
-      .catch((err: any) => {
-        if (err) {
-          console.error(err);
-        }
+        })
+        .catch((err: any) => {
+          if (err) {
+            setResturants([]);
+            console.error(err);
+          }
+        });
+      setTimeout(function () {
+        cooldown = false;
+      }, 2500);
+    } else {
+      SweetAlert.fire({
+        title: "You have to wait",
+        text: "You have to wait before making a new search",
+        icon: "error",
       });
-  }
-
-  function goBack() {
-    setResturants([]);
+    }
   }
 
   return (
     <div className="App">
-      <ThemeProvider theme={darkTheme}>
-        <div className="header">
-          <h1>Food Searcher</h1>
-          <p>This is the best website ever to cure your hunger</p>
-        </div>
+      <NavBar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
 
-        {resturants.length == 0 ? (
-          <InputBox
-            errorText={errorText}
-            range={range}
-            updateRange={updateRange}
-            keyword={keyword}
-            updateKeyword={updateKeyword}
+      <ThemeProvider theme={darkTheme}>
+        <InputBox
+          errorText={errorText}
+          range={range}
+          updateRange={updateRange}
+          keyword={keyword}
+          updateKeyword={updateKeyword}
+          submit={submit}
+        />
+      </ThemeProvider>
+
+      {resturants.length > 0 ? (
+        <div className="info-cont">
+          <div className="resturants">
+            {resturants.map((el: ResturantStruct, idx: number) => {
+              return el.permanently_closed !== true &&
+                el.business_status == "OPERATIONAL" ? (
+                <Resturant key={idx} el={el} idx={idx} />
+              ) : (
+                ""
+              );
+            })}
+          </div>
+
+          <OptionsList
+            priceRange={priceRange}
+            priceRangeChange={handlePriceRangeChange}
+            sort={sort}
+            handleSortChange={handleSortChange}
+            radius={range}
+            radiusChange={handleRadiusChange}
             submit={submit}
           />
-        ) : (
-          <Button variant="outlined" className="goback-button" onClick={goBack}>
-            Go Back
-          </Button>
-        )}
-
-        <div className="resturants">
-          {resturants.map((el: ResturantStruct, idx: number) => {
-            return el.permanently_closed !== true &&
-              el.business_status == "OPERATIONAL" ? (
-              <Resturant key={idx} el={el} idx={idx} />
-            ) : (
-              ""
-            );
-          })}
         </div>
-      </ThemeProvider>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

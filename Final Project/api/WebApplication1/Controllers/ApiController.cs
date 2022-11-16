@@ -43,7 +43,7 @@ namespace WebApplication1.Controllers
 
                 string apiResp = await APICallAsync(baseUrl, urlParams, "application/json");
 
-                ResturantsModel apiObj = JsonConvert.DeserializeObject<ResturantsModel>(apiResp);
+                UnsortedResults apiObj = JsonConvert.DeserializeObject<UnsortedResults>(apiResp);
 
                 if (apiObj != null && (sort != null && sort != "distance"))
                 {
@@ -70,7 +70,8 @@ namespace WebApplication1.Controllers
                     {
                         return Ok(new SortedResults
                         {
-                            results = sortedResturants
+                            results = sortedResturants,
+                            status = apiObj.status
                         });
                     } 
                     else

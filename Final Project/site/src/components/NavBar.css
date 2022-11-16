@@ -1,0 +1,15 @@
+.MuiButtonGroup-root,
+.user-menu {
+    margin-left: auto;
+}
+
+.MuiToolbar-root .header {
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    color: #000
+}
+
+.MuiToolbar-root {
+    background: #fff;
+}

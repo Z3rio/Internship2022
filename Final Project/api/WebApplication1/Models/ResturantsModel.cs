@@ -9,6 +9,9 @@ namespace WebApplication1.Models
         public OpeningHoursObj? opening_hours { get; set; }
         public string[]? types { get; set; }
         public string? name { get; set; }
+        public string? vicinity { get; set; }
+        public string? business_status { get; set; }
+        public bool? permanently_closed { get; set; }
         public decimal? rating { get; set; }
         public int? price_level { get; set; }
     }
@@ -33,10 +36,15 @@ namespace WebApplication1.Models
             public PeriodObj[]? periods { get; set; }
         }
 
-        public PlaceObj[]? results { get; set; }
+        public class UnsortedResults
+        {
+            public PlaceObj[]? results { get; set; }
+            public string status { get; set; }
+        }
 
         public class SortedResults { 
             public IOrderedEnumerable<PlaceObj> results { get; set; }
+            public string status { get; set; }
         }
     }
 }

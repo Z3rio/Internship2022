@@ -1,1 +1,60 @@
-        1 file(s) copied.
+.resturant {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  row-gap: 7.5px;
+
+  min-width: 25vw;
+  width: 100%;
+  max-width: 32.5vw;
+
+  padding-left: 0.75rem;
+
+  padding: 7.5px 12.5px;
+  border-left: 3px solid;
+  border-radius: 0 5px 5px 0;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background: #e9e9e9;
+}
+
+.resturant.no-data {
+  border-left-color: #e7ad42;
+}
+
+.resturant.open {
+  border-left-color: #38bd38;
+}
+
+.resturant.closed {
+  border-left-color: #dd5c5c;
+}
+
+.chips {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  column-gap: 7.5px;
+  flex-wrap: wrap;
+}
+
+.upper-text {
+  display: flex;
+  flex-direction: row;
+  column-gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.upper-text h1 {
+  color: #000;
+  font-family: 'Arial', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 600;
+}
+
+.upper-text h3 {
+  color: #444;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+}

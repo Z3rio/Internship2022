@@ -1,46 +1,90 @@
-.input-box {
+.main-box {
   margin-top: 2rem;
 
   display: flex;
   flex-direction: column;
   row-gap: 10px;
+  align-items: center;
+
+  background-image: url(https://cdn.otstatic.com/cfe/10/images/header_desktop-ad18b5.jpg);
+  background-size: cover;
+  background-color: #141a26;
+
+  padding: 40px 20px;
+
+  margin: 50px 0 25px 0;
 }
 
-.input-box .MuiPaper-root {
+.main-box .inputs-box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+
+  margin-top: 2rem;
+}
+
+.header {
+  color: #fff;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 2px;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.slogan {
+  color: #ddd;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.0rem;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.main-box .MuiPaper-root {
   margin-bottom: 1rem;
 }
 
-.input-box div:not(.MuiPaper-root) {
+.main-box .range {
   display: flex;
   flex-direction: row;
   column-gap: 20px;
   align-items: center;
 }
 
-.input-box .MuiFormControl-root {
+.main-box .MuiFormControl-root {
   flex: 1;
 }
 
-.input-box .MuiInputBase-root {
+.main-box .MuiInputBase-root {
   width: 100%;
 }
 
-.input-box .MuiInputBase-root input {
+.main-box .MuiInputBase-root input {
   color: #fff;
   font-size: 1rem;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
 }
 
-.input-box div .MuiSlider-root {
+.main-box div .MuiSlider-root {
   flex: 1;
 }
 
-.input-box input[type="text"] {
+.main-box input[type="text"] {
   padding: 5px 10px;
   border-radius: 5px;
   outline: none;
 
   font-family: 'Roboto', sans-serif;
   font-size: 0.9rem;
+}
+
+.main-box .MuiSlider-root {
+  min-width: 300px;
+}
+
+.inputs-box > div {
+  width: 100%;
 }

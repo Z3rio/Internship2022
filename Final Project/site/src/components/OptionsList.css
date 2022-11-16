@@ -1,0 +1,37 @@
+.options {
+  padding: 7.5px 12.5px;
+  border-radius:0 0 5px 5px;
+  box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+  background: #e9e9e9;
+
+  min-width: 20vw;
+  min-height: 20vh;
+}
+
+.options .MuiTypography-root {
+  color: rgba(0, 0, 0, 0.6);
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+
+  margin: 0px;
+  margin-left: 8px;
+  margin-top: 10px;
+}
+
+.options .MuiFormControl-root {
+  width: 100%;
+}
+
+.options .MuiSlider-root {
+  width: calc(100% - 16px);
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.options .MuiButton-root {
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
