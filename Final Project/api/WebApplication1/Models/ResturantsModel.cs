@@ -43,8 +43,8 @@ namespace WebApplication1.Models
 
         public class PlaceResult
         {
-            public string status { get; set; }
-            public PlaceObj result { get; set; }
+            public string? status { get; set; }
+            public PlaceObj? result { get; set; }
         }
     }
 }

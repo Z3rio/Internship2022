@@ -51,9 +51,9 @@ namespace WebApplication1.Controllers
                 {
                     UnsortedResults? apiObj = JsonConvert.DeserializeObject<UnsortedResults>(apiResp);
 
-                    if (apiObj != null && (sort != null && sort != "distance") && apiObj.status != null)
+                    if (apiObj != null && (sort != null && sort != "distance") && apiObj.status != null && apiObj.results != null)
                     {
-                        IOrderedEnumerable<PlaceObj> sortedResturants = null;
+                        IOrderedEnumerable<PlaceObj>? sortedResturants = null;
 
                         switch (sort)
                         {
@@ -70,10 +70,28 @@ namespace WebApplication1.Controllers
                                 sortedResturants = apiObj.results.OrderBy(el => el.price_level);
                                 break;
                             case "opennow":
-                                sortedResturants = apiObj.results.OrderByDescending(el => el.opening_hours.open_now);
+                                sortedResturants = apiObj.results.OrderByDescending((el) =>
+                                {
+                                    if (el.opening_hours != null)
+                                    {
+                                        return el.opening_hours.open_now;
+                                    }
+                                    else
+                                    {
+                                        return false;
+                                    }
+                                });
                                 break;
                             case "closednow":
-                                sortedResturants = apiObj.results.OrderBy(el => el.opening_hours.open_now);
+                                sortedResturants = apiObj.results.OrderBy((el) => {
+                                    if (el.opening_hours != null)
+                                    {
+                                        return el.opening_hours.open_now;
+                                    } else
+                                    {
+                                        return false;
+                                    }
+                                });
                                 break;
                         }
 
@@ -107,11 +125,11 @@ namespace WebApplication1.Controllers
         {
             if (PlaceId != null)
             {
-                string apiResp = await APICallAsync("https://maps.googleapis.com/maps/api/place/details/json", $"?key={Program.apiKey}&place_id={PlaceId}", "application/json");
+                string? apiResp = await APICallAsync("https://maps.googleapis.com/maps/api/place/details/json", $"?key={Program.apiKey}&place_id={PlaceId}", "application/json");
                 
                 if (apiResp != null)
                 {
-                    PlaceResult apiObj = JsonConvert.DeserializeObject<PlaceResult>(apiResp);
+                    PlaceResult? apiObj = JsonConvert.DeserializeObject<PlaceResult>(apiResp);
                     
                     if (apiObj != null && apiObj.status == "OK")
                     {
@@ -144,11 +162,18 @@ namespace WebApplication1.Controllers
 
                     string? apiResp = await APICallAsync("https://localhost:7115/resturants/getresturant", $"?placeId={PlaceId}", "application/json");
                         
-                    PlaceObj apiObj = JsonConvert.DeserializeObject<PlaceObj>(apiResp);
-
-                    if (apiResp != null && apiObj != null)
+                    if (apiResp != null)
                     {
-                        RetVal.Add(apiObj);
+                        PlaceObj? apiObj = JsonConvert.DeserializeObject<PlaceObj>(apiResp);
+
+                        if (apiResp != null && apiObj != null)
+                        {
+                            RetVal.Add(apiObj);
+                        }
+                    }
+                    else
+                    {
+                        return NoContent();
                     }
                 }
 
@@ -158,8 +183,6 @@ namespace WebApplication1.Controllers
             {
                 return NoContent();
             }
-
-            return BadRequest();
         }
     }
 }

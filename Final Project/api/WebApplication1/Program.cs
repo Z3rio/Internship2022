@@ -5,10 +5,10 @@ namespace WebApplication1
 {
     public static class Program {
 
-        public static IConfiguration cfg = null;
+        public static IConfiguration? cfg = null;
 
-        public static string apiKey = "";
-        public static string discordToken = "";
+        public static string? apiKey;
+        public static string? discordToken;
 
         public static void Main(string[] args)
         {
@@ -19,8 +19,15 @@ namespace WebApplication1
             Program.cfg = new ConfigurationBuilder()
                 .AddEnvironmentVariables()
                 .Build();
-            Program.apiKey = Program.cfg["GOOGLE_API_KEY"];
-            Program.discordToken = Program.cfg["DISCORD_BOT_TOKEN"];
+
+            if (Program.cfg["GOOGLE_API_KEY"] != null)
+            {
+                Program.apiKey = Program.cfg["GOOGLE_API_KEY"];
+            }
+            if (Program.cfg["DISCORD_BOT_TOKEN"] != null)
+            {
+                Program.discordToken = Program.cfg["DISCORD_BOT_TOKEN"];
+            }
 
             Bots.Discord.Start();
 
