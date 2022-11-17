@@ -41,47 +41,47 @@ namespace WebApplication1.Controllers
                     urlParams += $"&radius={radius}";
                 }
 
-                string apiResp = await APICallAsync(baseUrl, urlParams, "application/json");
+                string? apiResp = await APICallAsync(baseUrl, urlParams, "application/json");
 
-                UnsortedResults apiObj = JsonConvert.DeserializeObject<UnsortedResults>(apiResp);
-
-                if (apiObj != null && (sort != null && sort != "distance"))
+                if (apiResp != null)
                 {
-                    IOrderedEnumerable<PlaceObj> sortedResturants = null;
+                    UnsortedResults? apiObj = JsonConvert.DeserializeObject<UnsortedResults>(apiResp);
 
-                    if (sort == "alphabetical")
+                    if (apiObj != null && (sort != null && sort != "distance") && apiObj.status != null)
                     {
-                        sortedResturants = from s in apiObj.results orderby s.name select s;
-                    } 
-                    else if (sort == "rating")
-                    {
-                        sortedResturants = from s in apiObj.results orderby s.rating descending select s;
-                    } 
-                    else if (sort == "expensive")
-                    {
-                        sortedResturants = from s in apiObj.results orderby s.price_level descending select s;
-                    }
-                    else if (sort == "cheap")
-                    {
-                        sortedResturants = from s in apiObj.results orderby s.price_level ascending select s;
-                    }
+                        IOrderedEnumerable<PlaceObj>? sortedResturants = null;
 
-                    if (sortedResturants != null)
-                    {
-                        return Ok(new SortedResults
+                        if (sort == "alphabetical")
                         {
-                            results = sortedResturants,
-                            status = apiObj.status
-                        });
-                    } 
-                    else
-                    {
-                        return NoContent();
-                    }
-                }
+                            sortedResturants = from s in apiObj.results orderby s.name select s;
+                        }
+                        else if (sort == "rating")
+                        {
+                            sortedResturants = from s in apiObj.results orderby s.rating descending select s;
+                        }
+                        else if (sort == "expensive")
+                        {
+                            sortedResturants = from s in apiObj.results orderby s.price_level descending select s;
+                        }
+                        else if (sort == "cheap")
+                        {
+                            sortedResturants = from s in apiObj.results orderby s.price_level ascending select s;
+                        }
 
-                if (apiResp != null && apiResp != "")
-                {
+                        if (sortedResturants != null)
+                        {
+                            return Ok(new SortedResults
+                            {
+                                results = sortedResturants,
+                                status = apiObj.status
+                            });
+                        }
+                        else
+                        {
+                            return NoContent();
+                        }
+                    }
+
                     return Ok(apiObj);
                 }
                 else

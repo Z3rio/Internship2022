@@ -58,3 +58,12 @@
   font-size: 1.05rem;
   font-weight: 500;
 }
+
+.ratings {
+  display: flex;
+  flex-direction: row;
+}
+
+.ratings .MuiRating-root.money {
+  margin-left: auto;
+}

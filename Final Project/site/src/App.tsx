@@ -55,7 +55,10 @@ function App() {
     setPriceRange(newValue);
   };
 
-  const handleSortChange = (event: Event, newValue: string) => {
+  const handleSortChange = (
+    event: Event,
+    newValue: { props: { value: string } }
+  ) => {
     setSort(newValue.props.value);
   };
 

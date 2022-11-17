@@ -13,3 +13,7 @@
 .MuiToolbar-root {
     background: #fff;
 }
+
+.MuiPaper-root {
+    z-index: 3;
+}

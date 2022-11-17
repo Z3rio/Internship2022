@@ -10,6 +10,8 @@
 .App {
   display: flex;
   flex-direction: column;
+
+  overflow-y: scroll;
 }
 
 *::-webkit-scrollbar {
@@ -51,6 +53,10 @@ h1, p, h3, h2 {
   overflow-y: hidden;
 
   flex: 1;
+
+  min-height: 25vw;
+  height: fit-content;
+  max-height: 50vw;
 
   margin: 25px 0;
 }

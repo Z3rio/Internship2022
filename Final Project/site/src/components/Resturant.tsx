@@ -1,7 +1,11 @@
 import Rating from "@mui/material/Rating";
 import Chip from "@mui/material/Chip";
+import { styled } from "@mui/material/styles";
 
 import "./Resturant.css";
+
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 
 interface PropsStruct {
   idx: number;
@@ -20,6 +24,15 @@ interface PropsStruct {
 function FormatChipString(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1).replace(/_/g, " ");
 }
+
+const StyledRating = styled(Rating)({
+  "& .MuiRating-iconFilled": {
+    color: "#118C4F",
+  },
+  "& .MuiRating-iconHover": {
+    color: "#118C4F",
+  },
+});
 
 export default function Resturant(props: PropsStruct) {
   return (
@@ -51,7 +64,18 @@ export default function Resturant(props: PropsStruct) {
         })}
       </div>
 
-      <Rating value={props.el.rating} readOnly />
+      <div className="ratings">
+        <Rating value={props.el.rating} precision={0.1} readOnly />
+
+        <StyledRating
+          className="money"
+          icon={<AttachMoneyIcon fontSize="inherit" />}
+          emptyIcon={<AttachMoneyOutlinedIcon fontSize="inherit" />}
+          readOnly
+          precision={0.1}
+          value={props.el.rating}
+        />
+      </div>
     </div>
   );
 }

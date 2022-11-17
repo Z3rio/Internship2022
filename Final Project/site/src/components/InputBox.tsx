@@ -19,6 +19,12 @@ interface PropsStruct {
 import "./InputBox.css";
 
 export default function InputBox(props: PropsStruct) {
+  const handleKeyPress = (e: { key: string }) => {
+    if (e.key == "Enter") {
+      props.submit();
+    }
+  };
+
   return (
     <div className="main-box">
       <h1 className="header">Find new great food</h1>
@@ -37,6 +43,7 @@ export default function InputBox(props: PropsStruct) {
           value={props.keyword}
           onChange={props.updateKeyword}
           color="primary"
+          onKeyDown={handleKeyPress}
         />
 
         <div className="range">

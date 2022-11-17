@@ -39,12 +39,12 @@ namespace WebApplication1.Models
         public class UnsortedResults
         {
             public PlaceObj[]? results { get; set; }
-            public string status { get; set; }
+            public string? status { get; set; }
         }
 
         public class SortedResults { 
-            public IOrderedEnumerable<PlaceObj> results { get; set; }
-            public string status { get; set; }
+            public IOrderedEnumerable<PlaceObj>? results { get; set; }
+            public string? status { get; set; }
         }
     }
 }
