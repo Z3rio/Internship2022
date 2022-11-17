@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./App.css";
 
 import Swal from "sweetalert2";
@@ -36,6 +36,8 @@ interface ResturantStruct {
 let cooldown = false;
 
 function App() {
+  const resturantsRef = useRef(null);
+
   const [resturants, setResturants] = useState<Array<ResturantStruct>>([]);
   const [errorText, setErrorText] = useState<string>("");
 
@@ -107,6 +109,10 @@ function App() {
             if (resp.data.status !== "ZERO_RESULTS") {
               setResturants(resp.data.results);
               setErrorText("");
+
+              if (resturantsRef.current !== null) {
+                resturantsRef.current.scrollTop = 0;
+              }
             } else {
               setResturants([]);
               setErrorText("No search results found...");
@@ -152,7 +158,7 @@ function App() {
 
       {resturants.length > 0 ? (
         <div className="info-cont">
-          <div className="resturants">
+          <div className="resturants" ref={resturantsRef}>
             {resturants.map((el: ResturantStruct, idx: number) => {
               return el.permanently_closed !== true &&
                 el.business_status == "OPERATIONAL" ? (

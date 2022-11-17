@@ -41,8 +41,6 @@ namespace WebApplication1.Controllers
                     urlParams += $"&radius={radius}";
                 }
 
-                Console.WriteLine(onlyOpenNow);
-
                 if (onlyOpenNow == true)
                 {
                     urlParams += "&opennow";
@@ -101,6 +99,18 @@ namespace WebApplication1.Controllers
                     return NoContent();
                 }
             }
+
+            return BadRequest();
+        }
+
+        [Route("/resturants/resturantsoftheday")]
+        public IActionResult GetResturantsOfTheDay(
+            string sort, bool onlyOpenNow,
+            int maxPrice = 5, int minPrice = 0,
+            string search = "resturant", string radius = "2000",
+            string lat = "57.78029486070066", string lon = "14.178692680912373"
+        )
+        {
 
             return BadRequest();
         }
