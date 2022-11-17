@@ -14,7 +14,7 @@ namespace WebApplication1.Controllers
         [AllowCrossSiteJson]
         [Route("/resturants/search")]
         public async Task<IActionResult> GetResturants(
-            string sort, 
+            string sort,
             int maxPrice = 5, int minPrice = 0,
             string search = "resturant", string radius = "2000", 
             string lat = "57.78029486070066", string lon = "14.178692680912373"
@@ -26,7 +26,7 @@ namespace WebApplication1.Controllers
 
             if (
                 string.IsNullOrEmpty(search) == false && string.IsNullOrEmpty(radius) == false && 
-                (sort == null || (sort == "rating" || sort == "alphabetical" || sort == "expensive" || sort == "cheap" || sort == "distance")) && 
+                (sort == null || (sort == "rating" || sort == "alphabetical" || sort == "expensive" || sort == "cheap" || sort == "distance" || sort == "opennow" || sort == "closednow")) && 
                 minPrice >= 0 && minPrice <= 5 && maxPrice >= 0 && maxPrice <= 5 && minPrice <= maxPrice
             )
             {
@@ -66,6 +66,14 @@ namespace WebApplication1.Controllers
                         else if (sort == "cheap")
                         {
                             sortedResturants = from s in apiObj.results orderby s.price_level ascending select s;
+                        }
+                        else if (sort == "opennow")
+                        {
+                            sortedResturants = from s in apiObj.results orderby s.opening_hours.open_now descending select s;
+                        }
+                        else if (sort == "closednow")
+                        {
+                            sortedResturants = from s in apiObj.results orderby s.opening_hours.open_now ascending select s;
                         }
 
                         if (sortedResturants != null)

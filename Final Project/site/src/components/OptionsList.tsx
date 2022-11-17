@@ -38,6 +38,9 @@ export default function OptionsList(props: PropsStruct) {
           <MenuItem value={"alphabetical"}>Alphabetical</MenuItem>
           <MenuItem value={"expensive"}>Expensive first</MenuItem>
 
+          <MenuItem value={"opennow"}>Open now first</MenuItem>
+          <MenuItem value={"closednow"}>Closed now first</MenuItem>
+
           <MenuItem value={"cheap"}>Cheapest first</MenuItem>
           <MenuItem value={"distance"}>Closest</MenuItem>
         </Select>
