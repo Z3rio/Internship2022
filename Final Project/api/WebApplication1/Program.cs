@@ -9,6 +9,7 @@ namespace WebApplication1
 
         public static string? apiKey;
         public static string? discordToken;
+        public static string? slackToken;
 
         public static void Main(string[] args)
         {
@@ -28,9 +29,13 @@ namespace WebApplication1
             {
                 Program.discordToken = Program.cfg["DISCORD_BOT_TOKEN"];
             }
+            if (Program.cfg["SLACK_BOT_OATH_TOKEN"] != null)
+            {
+                Program.slackToken = Program.cfg["SLACK_BOT_OATH_TOKEN"];
+            }
 
             Bots.Discord.Start();
-
+            Bots.Slack.Start();
 
             var builder = WebApplication.CreateBuilder(args);
 
