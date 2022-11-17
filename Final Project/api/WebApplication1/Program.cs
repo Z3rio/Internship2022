@@ -8,6 +8,8 @@ namespace WebApplication1
         public static IConfiguration cfg = null;
 
         public static string apiKey = "";
+        public static string discordToken = "";
+
         public static void Main(string[] args)
         {
             var root = Directory.GetCurrentDirectory();
@@ -18,19 +20,20 @@ namespace WebApplication1
                 .AddEnvironmentVariables()
                 .Build();
             Program.apiKey = Program.cfg["GOOGLE_API_KEY"];
+            Program.discordToken = Program.cfg["DISCORD_BOT_TOKEN"];
+
+            Bots.Discord.Start();
+
 
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment() == false)
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 

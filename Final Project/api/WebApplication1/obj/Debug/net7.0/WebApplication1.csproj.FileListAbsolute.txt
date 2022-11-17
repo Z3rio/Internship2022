@@ -71,3 +71,12 @@ C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\S
 C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\System.Web.WebPages.Razor.dll
 C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\System.Web.WebPages.dll
 C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\Microsoft.Web.Infrastructure.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\Discord.Net.Commands.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\Discord.Net.Core.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\Discord.Net.Interactions.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\Discord.Net.Rest.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\Discord.Net.Webhook.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\Discord.Net.WebSocket.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\System.Interactive.Async.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\System.Linq.Async.dll
+C:\Users\praktik\NeoPraktik\Final Project\api\WebApplication1\bin\Debug\net7.0\System.Reactive.dll
