@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace WebApplication1
+namespace WebApplication1.DotEnv
 {
     public class DotEnv
     {

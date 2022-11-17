@@ -4,11 +4,14 @@ using Newtonsoft.Json;
 using WebApplication1.Models;
 using System.Linq;
 using static WebApplication1.Models.ResturantsModel;
+using WebApplication1;
 
 namespace WebApplication1.Controllers
 {
     public class ApiController : Controller
-    {
+    { 
+        List<string> ROTD = new List<string> { "" };
+
         // 
         // GET: /resturants/search
         [AllowCrossSiteJson]
@@ -20,10 +23,6 @@ namespace WebApplication1.Controllers
             string lat = "57.78029486070066", string lon = "14.178692680912373"
         )
         {
-            IConfiguration config = new ConfigurationBuilder()
-                .AddEnvironmentVariables()
-                .Build();
-
             if (
                 string.IsNullOrEmpty(search) == false && string.IsNullOrEmpty(radius) == false && 
                 (sort == null || (sort == "rating" || sort == "alphabetical" || sort == "expensive" || sort == "cheap" || sort == "distance" || sort == "opennow" || sort == "closednow")) && 
@@ -31,7 +30,7 @@ namespace WebApplication1.Controllers
             )
             {
                 string baseUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
-                string urlParams = $"?key={config["GOOGLE_API_KEY"]}&keyword={search}&location={lat}%2C{lon}&type=resturant&maxprice={maxPrice}&minprice={minPrice}";
+                string urlParams = $"?key={Program.apiKey}&keyword={search}&location={lat}%2C{lon}&type=resturant&maxprice={maxPrice}&minprice={minPrice}";
 
                 if (sort == "distance")
                 {
@@ -104,15 +103,18 @@ namespace WebApplication1.Controllers
         }
 
         [Route("/resturants/resturantsoftheday")]
-        public IActionResult GetResturantsOfTheDay(
-            string sort, bool onlyOpenNow,
-            int maxPrice = 5, int minPrice = 0,
-            string search = "resturant", string radius = "2000",
-            string lat = "57.78029486070066", string lon = "14.178692680912373"
-        )
+        public IActionResult GetResturantsOfTheDay()
         {
+            if (ROTD.Count != 0)
+            {
 
-            return BadRequest();
+
+                return Ok(ROTD);
+            }
+            else
+            {
+                return NoContent();
+            }
         }
     }
 }
