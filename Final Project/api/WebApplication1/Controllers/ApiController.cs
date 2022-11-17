@@ -58,7 +58,7 @@ namespace WebApplication1.Controllers
                     {
                         IOrderedEnumerable<PlaceObj> sortedResturants = null;
 
-                        switch(sort)
+                        switch (sort)
                         {
                             case "alphabetical":
                                 sortedResturants = apiObj.results.OrderBy(el => el.name);

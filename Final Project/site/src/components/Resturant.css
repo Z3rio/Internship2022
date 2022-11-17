@@ -5,10 +5,8 @@
   row-gap: 7.5px;
 
   min-width: 25vw;
-  width: 100%;
+  width: calc(100% - 28px);
   max-width: 32.5vw;
-
-  padding-left: 0.75rem;
 
   padding: 7.5px 12.5px;
   border-left: 3px solid;

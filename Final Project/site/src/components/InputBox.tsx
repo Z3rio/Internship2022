@@ -1,8 +1,7 @@
-import Slider from "@mui/material/Slider";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import Alert from "@mui/material/Alert";
+import { Alert, Button, TextField, Typography, Slider } from "@mui/material";
+import TouchRipple from "@mui/material/ButtonBase/TouchRipple";
+
+import { useRef } from "react";
 
 interface PropsStruct {
   range: number;
@@ -19,9 +18,32 @@ interface PropsStruct {
 import "./InputBox.css";
 
 export default function InputBox(props: PropsStruct) {
+  const rippleRef = useRef(null);
+  const buttonRef = useRef(null);
+
   const handleKeyPress = (e: { key: string }) => {
     if (e.key == "Enter") {
       props.submit();
+
+      const input = document.getElementById("keyword_input");
+
+      if (input) {
+        input.blur();
+      }
+
+      if (rippleRef !== null && buttonRef !== null) {
+        const rect = buttonRef.current.getBoundingClientRect();
+        rippleRef.current.start(
+          {
+            clientX: rect.left + rect.width / 2,
+            clientY: rect.top + rect.height / 2,
+          },
+          // when center is true, the ripple doesn't travel to the border of the container
+          { center: false }
+        );
+
+        setTimeout(() => rippleRef.current.stop({}), 320);
+      }
     }
   };
 
@@ -38,6 +60,7 @@ export default function InputBox(props: PropsStruct) {
         )}
 
         <TextField
+          id="keyword_input"
           variant="standard"
           label="Keyword / Search"
           value={props.keyword}
@@ -58,8 +81,9 @@ export default function InputBox(props: PropsStruct) {
           />
         </div>
 
-        <Button onClick={props.submit} variant="contained">
+        <Button onClick={props.submit} ref={buttonRef} variant="contained">
           Search
+          <TouchRipple ref={rippleRef} center />
         </Button>
       </div>
     </div>

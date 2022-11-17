@@ -47,6 +47,8 @@ function App() {
   const [priceRange, setPriceRange] = useState<Array<number>>([0, 5]);
   const [sort, setSort] = useState<string>("rating");
 
+  const [onlyOpenNow, setOnlyOpenNow] = useState<boolean>(false);
+
   function updateRange(e: any): void {
     setRange(e.target.value);
   }
@@ -60,6 +62,10 @@ function App() {
     newValue: { props: { value: string } }
   ) => {
     setSort(newValue.props.value);
+  };
+
+  const handleOnlyOpenNowChange = (event: Event, newValue: boolean) => {
+    setOnlyOpenNow(newValue);
   };
 
   const handleRadiusChange = (event: Event, newValue: number) => {
@@ -93,7 +99,7 @@ function App() {
 
       axios
         .post(
-          `https://localhost:7115/resturants/search?search=${keyword}&radius=${range}&minPrice=${priceRange[0]}&maxPrice=${priceRange[1]}&sort=${sort}`
+          `https://localhost:7115/resturants/search?search=${keyword}&radius=${range}&minPrice=${priceRange[0]}&maxPrice=${priceRange[1]}&sort=${sort}&onlyOpenNow=${onlyOpenNow}`
         )
         .then((resp: any) => {
           cooldown = true;
@@ -165,6 +171,8 @@ function App() {
             radius={range}
             radiusChange={handleRadiusChange}
             submit={submit}
+            onlyOpenNow={onlyOpenNow}
+            onlyOpenNowChanged={handleOnlyOpenNowChange}
           />
         </div>
       ) : (

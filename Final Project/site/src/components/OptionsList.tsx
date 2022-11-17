@@ -8,6 +8,8 @@ import {
   InputLabel,
   MenuItem,
   Button,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material";
 
 interface PropsStruct {
@@ -21,6 +23,9 @@ interface PropsStruct {
   radiusChange: Function;
 
   submit: Function;
+
+  onlyOpenNow: boolean;
+  onlyOpenNowChanged: Function;
 }
 
 export default function OptionsList(props: PropsStruct) {
@@ -45,6 +50,16 @@ export default function OptionsList(props: PropsStruct) {
           <MenuItem value={"distance"}>Closest</MenuItem>
         </Select>
       </FormControl>
+
+      <FormControlLabel
+        control={
+          <Checkbox
+            value={props.onlyOpenNow}
+            onChange={props.onlyOpenNowChanged}
+          />
+        }
+        label="Only show open now"
+      />
 
       <Typography gutterBottom>Price Range</Typography>
       <Slider
