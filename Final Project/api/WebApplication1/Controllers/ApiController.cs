@@ -56,31 +56,28 @@ namespace WebApplication1.Controllers
 
                     if (apiObj != null && (sort != null && sort != "distance") && apiObj.status != null)
                     {
-                        IOrderedEnumerable<PlaceObj>? sortedResturants = null;
+                        IOrderedEnumerable<PlaceObj> sortedResturants = null;
 
-                        if (sort == "alphabetical")
+                        switch(sort)
                         {
-                            sortedResturants = from s in apiObj.results orderby s.name select s;
-                        }
-                        else if (sort == "rating")
-                        {
-                            sortedResturants = from s in apiObj.results orderby s.rating descending select s;
-                        }
-                        else if (sort == "expensive")
-                        {
-                            sortedResturants = from s in apiObj.results orderby s.price_level descending select s;
-                        }
-                        else if (sort == "cheap")
-                        {
-                            sortedResturants = from s in apiObj.results orderby s.price_level ascending select s;
-                        }
-                        else if (sort == "opennow")
-                        {
-                            sortedResturants = from s in apiObj.results orderby s.opening_hours.open_now descending select s;
-                        }
-                        else if (sort == "closednow")
-                        {
-                            sortedResturants = from s in apiObj.results orderby s.opening_hours.open_now ascending select s;
+                            case "alphabetical":
+                                sortedResturants = apiObj.results.OrderBy(el => el.name);
+                                break;
+                            case "rating":
+                                sortedResturants = apiObj.results.OrderByDescending(el => el.rating);
+                                break;
+                            case "expensive":
+                                sortedResturants = apiObj.results.OrderByDescending(el => el.price_level);
+                                break;
+                            case "cheap":
+                                sortedResturants = apiObj.results.OrderBy(el => el.price_level);
+                                break;
+                            case "opennow":
+                                sortedResturants = apiObj.results.OrderByDescending(el => el.opening_hours.open_now);
+                                break;
+                            case "closednow":
+                                sortedResturants = apiObj.results.OrderBy(el => el.opening_hours.open_now);
+                                break;
                         }
 
                         if (sortedResturants != null)
