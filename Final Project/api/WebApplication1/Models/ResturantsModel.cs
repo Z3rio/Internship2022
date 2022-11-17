@@ -14,6 +14,7 @@ namespace WebApplication1.Models
         public bool? permanently_closed { get; set; }
         public decimal? rating { get; set; }
         public int? price_level { get; set; }
+        public string? place_id { get; set; }
     }
 
     public class ResturantsModel
@@ -24,16 +25,9 @@ namespace WebApplication1.Models
             public string? time { get; set; }
         }
 
-        public class PeriodObj
-        {
-            public TimeObj? close { get; set; }
-            public TimeObj? open { get; set; }
-        }
-
         public class OpeningHoursObj
         {
             public bool? open_now { get; set; }
-            public PeriodObj[]? periods { get; set; }
         }
 
         public class UnsortedResults
@@ -45,6 +39,12 @@ namespace WebApplication1.Models
         public class SortedResults { 
             public IOrderedEnumerable<PlaceObj>? results { get; set; }
             public string? status { get; set; }
+        }
+
+        public class PlaceResult
+        {
+            public string status { get; set; }
+            public PlaceObj result { get; set; }
         }
     }
 }

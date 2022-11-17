@@ -10,7 +10,7 @@ namespace WebApplication1.Controllers
 {
     public class ApiController : Controller
     { 
-        List<string> ROTD = new List<string> { "" };
+        List<string> ROTD = new List<string> { "ChIJzwAKy8WxEmsRh-SqQrC5mnk" };
 
         // 
         // GET: /resturants/search
@@ -46,7 +46,7 @@ namespace WebApplication1.Controllers
                 }
 
                 string? apiResp = await APICallAsync(baseUrl, urlParams, "application/json");
-
+                    
                 if (apiResp != null)
                 {
                     UnsortedResults? apiObj = JsonConvert.DeserializeObject<UnsortedResults>(apiResp);
@@ -102,19 +102,64 @@ namespace WebApplication1.Controllers
             return BadRequest();
         }
 
+        [Route("/resturants/getresturant")]
+        public async Task<IActionResult> GetResturantFromPlaceId(string PlaceId)
+        {
+            if (PlaceId != null)
+            {
+                string apiResp = await APICallAsync("https://maps.googleapis.com/maps/api/place/details/json", $"?key={Program.apiKey}&place_id={PlaceId}", "application/json");
+                
+                if (apiResp != null)
+                {
+                    PlaceResult apiObj = JsonConvert.DeserializeObject<PlaceResult>(apiResp);
+                    
+                    if (apiObj != null && apiObj.status == "OK")
+                    {
+                        return Ok(apiObj.result);
+                    }
+                    else
+                    {
+                        return NoContent();
+                    }
+                }
+                else
+                {
+                    return NoContent();
+                }
+            } 
+
+            return BadRequest();
+        }
+
         [Route("/resturants/resturantsoftheday")]
-        public IActionResult GetResturantsOfTheDay()
+        public async Task<IActionResult> GetResturantsOfTheDay()
         {
             if (ROTD.Count != 0)
             {
+                List<PlaceObj> RetVal = new List<PlaceObj> { };
 
+                for (int i = 0; i < ROTD.Count; i++)
+                {
+                    string PlaceId = ROTD[i];
 
-                return Ok(ROTD);
+                    string? apiResp = await APICallAsync("https://localhost:7115/resturants/getresturant", $"?placeId={PlaceId}", "application/json");
+                        
+                    PlaceObj apiObj = JsonConvert.DeserializeObject<PlaceObj>(apiResp);
+
+                    if (apiResp != null && apiObj != null)
+                    {
+                        RetVal.Add(apiObj);
+                    }
+                }
+
+                return Ok(RetVal);
             }
             else
             {
                 return NoContent();
             }
+
+            return BadRequest();
         }
     }
 }
