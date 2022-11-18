@@ -51,10 +51,6 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
-            },
-            "SlackNet": {
-              "target": "Package",
-              "version": "[0.10.15, )"
             }
           },
           "imports": [
