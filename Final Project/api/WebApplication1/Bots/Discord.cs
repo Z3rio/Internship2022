@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using static api.Handler;
 using WebApplication1.Models;
 using static WebApplication1.Models.ResturantsModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WebApplication1.Bots
 {
@@ -52,12 +53,19 @@ namespace WebApplication1.Bots
             ROTCommand.WithName("resturantsoftoday");
             ROTCommand.WithDescription("See the resturants of today");
 
+            var RandomCommand = new SlashCommandBuilder();
+            RandomCommand.WithName("randomresturant");
+            RandomCommand.WithDescription("Find a random resturant");
+            RandomCommand.AddOption("keyword", ApplicationCommandOptionType.String, "The keyword to search for", isRequired: false);
+            RandomCommand.AddOption("onlyopen", ApplicationCommandOptionType.Boolean, "Does the random resturant have to be open?", isRequired: true);
+
             if (client != null)
             {
                 try
                 {
                     await client.CreateGlobalApplicationCommandAsync(searchCommand.Build());
                     await client.CreateGlobalApplicationCommandAsync(ROTCommand.Build());
+                    await client.CreateGlobalApplicationCommandAsync(RandomCommand.Build());
                 }
                 catch (HttpException exception)
                 {
@@ -73,6 +81,55 @@ namespace WebApplication1.Bots
             {
                 switch (command.Data.Name)
                 {
+                    case "randomresturant":
+                        string? keyword2 = null;
+                        var onlyOpenObj = command.Data.Options.Where(s => s.Name == "onlyopen");
+                        var onlyOpen = onlyOpenObj.First().Value;
+
+                        if (command.Data.Options.Count() != 1)
+                        {
+                            var keywordObj2 = command.Data.Options.Where(s => s.Name == "keyword");
+
+                            if (keywordObj2 != null)
+                            {
+                                keyword2 = keywordObj2.First().Value.ToString();
+                            }
+                        }
+
+                        string urlParams = "";
+
+                        if (keyword2 != null)
+                        {
+                            urlParams = $"?search={keyword2}&onlyopen={onlyOpen}";
+                        }
+                        else
+                        {
+                            urlParams = $"?onlyopen={onlyOpen}";
+                        }
+
+                        string? apiresp3 = await APICallAsync("https://localhost:7115/resturants/random", urlParams, "application/json");
+
+                        if (apiresp3 != null)
+                        {
+                            PlaceObj apiobj = JsonConvert.DeserializeObject<PlaceObj>(apiresp3);
+
+                            if (apiobj != null)
+                            {
+                                var embedBuiler = new EmbedBuilder()
+                                .WithAuthor(command.User.Username.ToString(), command.User.GetAvatarUrl() ?? command.User.GetDefaultAvatarUrl())
+                                .WithTitle("Random resturant")
+                                .WithDescription($"We found the perfect random resturant for you, {apiobj.name}! 🥳")
+                                .WithColor(Color.Green)
+                                .WithCurrentTimestamp();
+
+
+                                string OpenStr = apiobj.opening_hours.open_now == true ? "✅" : "❌";
+                                embedBuiler.AddField(apiobj.name, $"{OpenStr} {apiobj.vicinity}", true);
+
+                                await command.RespondAsync(embed: embedBuiler.Build());
+                            }
+                        }
+                        break;
                     case "resturantsoftoday":
                         string? apiresp2 = await APICallAsync("https://localhost:7115/resturants/resturantsoftheday", "", "application/json");
 

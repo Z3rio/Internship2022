@@ -10,6 +10,8 @@ namespace WebApplication1
         public static string? apiKey;
         public static string? discordToken;
         public static string? slackToken;
+        public static string? slackSigningSecret;
+        public static WebApplicationBuilder ? builder;
 
         public static void Main(string[] args)
         {
@@ -28,16 +30,18 @@ namespace WebApplication1
             if (Program.cfg["DISCORD_BOT_TOKEN"] != null)
             {
                 Program.discordToken = Program.cfg["DISCORD_BOT_TOKEN"];
-            }
-            if (Program.cfg["SLACK_BOT_OATH_TOKEN"] != null)
-            {
-                Program.slackToken = Program.cfg["SLACK_BOT_OATH_TOKEN"];
-            }
 
-            Bots.Discord.Start();
-            Bots.Slack.Start();
+                Bots.Discord.Start();
+            }
+            //if (Program.cfg["SLACK_BOT_OATH_TOKEN"] != null && Program.cfg["SLACK_SIGNING_SECRET"] != null)
+            //{
+            //    Program.slackToken = Program.cfg["SLACK_BOT_OATH_TOKEN"];
+            //    Program.slackSigningSecret = Program.cfg["SLACK_SIGNING_SECRET"];
 
-            var builder = WebApplication.CreateBuilder(args);
+            //    Bots.Slack.Start();
+            //}
+
+            builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllersWithViews();
 

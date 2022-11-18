@@ -48,9 +48,33 @@
               "target": "Package",
               "version": "[5.2.9, )"
             },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
+            },
+            "SlackNet": {
+              "target": "Package",
+              "version": "[0.10.15, )"
+            },
+            "SlackNet.AspNetCore": {
+              "target": "Package",
+              "version": "[0.10.15, )"
+            },
+            "SlackNet.Bot": {
+              "target": "Package",
+              "version": "[0.10.15, )"
+            },
+            "SlackNet.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[0.10.15, )"
+            },
+            "SlackNet.SimpleInjector": {
+              "target": "Package",
+              "version": "[0.10.15, )"
             }
           },
           "imports": [
