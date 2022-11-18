@@ -184,11 +184,11 @@ namespace WebApplication1.Controllers
         }
 
         [Route("/resturants/getresturant")]
-        public async Task<IActionResult> GetResturantFromPlaceId(string PlaceId)
+        public async Task<IActionResult> GetResturantFromPlaceId(string placeid)
         {
-            if (PlaceId != null)
+            if (placeid != null)
             {
-                string? apiResp = await APICallAsync("https://maps.googleapis.com/maps/api/place/details/json", $"?key={Program.apiKey}&place_id={PlaceId}", "application/json");
+                string? apiResp = await APICallAsync("https://maps.googleapis.com/maps/api/place/details/json", $"?key={Program.apiKey}&place_id={placeid}", "application/json");
                 
                 if (apiResp != null)
                 {

@@ -59,6 +59,11 @@ namespace WebApplication1.Bots
             RandomCommand.AddOption("keyword", ApplicationCommandOptionType.String, "The keyword to search for", isRequired: false);
             RandomCommand.AddOption("onlyopen", ApplicationCommandOptionType.Boolean, "Does the random resturant have to be open?", isRequired: true);
 
+            var GetResturantCommand = new SlashCommandBuilder();
+            GetResturantCommand.WithName("getresturant");
+            GetResturantCommand.WithDescription("Get a resturant from its place id");
+            GetResturantCommand.AddOption("place_id", ApplicationCommandOptionType.String, "The place id of the resturant", isRequired: true);
+
             if (client != null)
             {
                 try
@@ -66,6 +71,7 @@ namespace WebApplication1.Bots
                     await client.CreateGlobalApplicationCommandAsync(searchCommand.Build());
                     await client.CreateGlobalApplicationCommandAsync(ROTCommand.Build());
                     await client.CreateGlobalApplicationCommandAsync(RandomCommand.Build());
+                    await client.CreateGlobalApplicationCommandAsync(GetResturantCommand.Build());
                 }
                 catch (HttpException exception)
                 {
@@ -81,6 +87,33 @@ namespace WebApplication1.Bots
             {
                 switch (command.Data.Name)
                 {
+                    case "getresturant":
+                        var placeIdObj = command.Data.Options.Where(s => s.Name == "place_id");
+                        var placeId = placeIdObj.First().Value;
+
+                        string apiResp = await APICallAsync("https://localhost:7115/resturants/getresturant", $"?placeid={placeId}", "application/json");
+
+                        if (apiResp != null)
+                        {
+                            PlaceObj place = JsonConvert.DeserializeObject<PlaceObj>(apiResp);
+
+                            if (place != null)
+                            {
+                                var embedBuiler = new EmbedBuilder()
+                                   .WithAuthor(command.User.Username.ToString(), command.User.GetAvatarUrl() ?? command.User.GetDefaultAvatarUrl())
+                                   .WithTitle("Get resturant from place id")
+                                   .WithDescription($"We found {place.name} from place id {placeId}! 🥳")
+                                   .WithColor(Color.Green)
+                                   .WithCurrentTimestamp();
+
+
+                                string OpenStr = place.opening_hours.open_now == true ? "✅" : "❌";
+                                embedBuiler.AddField(place.name, $"{OpenStr} {place.vicinity}", true);
+
+                                await command.RespondAsync(embed: embedBuiler.Build());
+                            }
+                        }
+                        break;
                     case "randomresturant":
                         string? keyword2 = null;
                         var onlyOpenObj = command.Data.Options.Where(s => s.Name == "onlyopen");
