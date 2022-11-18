@@ -93,5 +93,4 @@ app.command("/searchresturant", async ({ command, ack, say }) => {
 (async () => {
     const port = 3000
     await app.start(process.env.PORT || port);
-    console.log(`⚡️ Slack Bolt app is running on port ${port}!`);
 })();
